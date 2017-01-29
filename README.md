@@ -1,3 +1,2 @@
 # ELSpring2016
-Template for Spring 2016 Embedded Linux class
-This is a template for students to clone for their work in the class. You should maintain the directory structure
+This repository belongs to N02768601. All work belongs to N02768601 unless stated otherwise.
