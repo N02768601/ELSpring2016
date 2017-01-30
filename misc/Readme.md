@@ -1,2 +1,1 @@
-A directory for misellaneous stuff. Nothing really relevant should be here!
-
+Any data here is irrelevant and should be ignored
