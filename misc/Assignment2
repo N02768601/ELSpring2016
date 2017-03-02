@@ -1,3 +1,5 @@
+pi@raspberrypi:~$ ifconfig
+
 pi@raspberrypi:~$ df -h
 
 pi@raspberrypi:~$ du -sk ~/
