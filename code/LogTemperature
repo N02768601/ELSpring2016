@@ -17,11 +17,8 @@ def logTemp():
         con = TempLog.connect()
         cur=con.cursor()
         cur.execute("CREATE TABLE TempData(Time timestamp, Celsius C, Fahrenhei$
-        with con:
-                try:
-                        [t,C,F]=readTemp()
-                        cur=con.cursor()
-                        cur.execute('INSERT INTO TempData values(?,?,?)',(t,C,F)
+        [t,C,F]=readTemp()
+        cur.execute('INSERT INTO TempData values(?,?,?)',(t,C,F)
 
 logTemp()
-
+#Couldn't get Temp Sensor to work
