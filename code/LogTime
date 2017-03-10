@@ -1,1 +1,18 @@
+#!usr/bin/python
+import sqlite3 as lite
+import datetime
+from time import strftime
 
+#Create testTime.db by entering in cmd sqlite3 testTime.db
+
+conn = lite.connect('testTime.db')
+with conn:
+        c = conn.cursor()
+        today = datetime.date.today()
+        now=strftime("%H:%M:%S")
+
+        #c.execute("DROP TABLE IF EXISTS Time")
+        #c.execute("CREATE TABLE Time(Date date, Time timestamp)")
+        #Additional Commands if needed
+
+        c.execute("INSERT INTO Time(Date,Time) VALUES(?,?)",(today,now))
