@@ -1,0 +1,86 @@
+from flask import Flask, render_template, request, redirect
+import Adafruit_PCA9685
+import time
+import os, shutil
+from picamera import PiCamera
+
+app = Flask(__name__, static_url_path='/static')
+app.config['PROPAGATE_EXCEPTIONS'] = True
+#servoPosition = 0
+pwm1 = Adafruit_PCA9685.PCA9685(0X40)
+pwm2 = Adafruit_PCA9685.PCA9685(0x40)
+pwm1.set_pwm_freq(50)
+pwm2.set_pwm_freq(50)
+camera = PiCamera()
+count = 0
+
+@app.route('/')
+def controls():
+        #global pwm1
+        templateData = {
+                'title': 'PiCamera'
+                #'pictureName': '/static/image.jpg'
+        }
+        #pwm1 = Adafruit_PCA9685.PCA9685(0x40)
+        return render_template('PiCam.html', **templateData)
+
+@app.route('/up', methods=['GET'])
+def moveUp():
+        global servoPosition
+        global pwm1
+        pwm1.set_pwm(0, 0, 12)
+        time.sleep(0.02)
+        pwm1.set_pwm(0, 0, 0)
+        return render_template('PiCam.html')
+@app.route('/down', methods=['GET'])
+def moveDown():
+        global servoPosition
+        global pwm1
+        #servoPosition = servoPosition - 12
+        pwm1.set_pwm(0, 0, 475)
+        time.sleep(0.1)
+        pwm1.set_pwm(0, 0, 0)
+        return render_template('PiCam.html')
+@app.route('/right', methods=['GET'])
+def moveRight():
+        #camera.stop_preview()
+        global pwm2
+        pwm2.set_pwm(1, 0, 12)
+        time.sleep(0.02)
+        pwm2.set_pwm(1, 0, 0)
+        #camera.start_preview()
+        return render_template('PiCam.html')
+@app.route('/left', methods=['GET'])
+def moveLeft():
+        #camera.stop_preview()
+        global pwm2
+        pwm2.set_pwm(1, 0, 475)
+        time.sleep(0.1)
+        pwm2.set_pwm(1, 0, 0)
+        #camera.start_preview()
+        return render_template('PiCam.html')
+@app.route('/takePicture', methods=['GET'])
+def takePicture():
+        if os.path.exists('static'):
+                shutil.rmtree('static')
+        #global count
+        #picturePath = '/var/www/html/Pictures/' + count + '.jpg'
+        #picture = 'picture' + count + '.jpg'
+        #if not os.path.exists('templates/Pictures')
+        os.makedirs('static')
+        #else
+        #       shutil.rmtree('templates/Pictures')
+        time.sleep(2)
+        camera.capture('static/image.jpg')
+        templateData = {
+
+                'title': 'PiCamera'
+                #'pictureName': '/static/image.jpg'
+        }
+        #return send_file(picture, mimetype='image/jpg')
+        return render_template('PiCam.html', **templateData)
+        #return redirect(url_for('PiCam'))
+if __name__ == "__main__":
+        app.jinja_env.auto_reload = True
+        app.config['TEMPLATES_AUTO_RELOAD'] = True
+        app.run('137.140.183.121', port=3000)
