@@ -1,0 +1,39 @@
+<html>
+<div>
+        <img src='/static/image.jpg' width='450vw' height='450vh'/>
+        <!--<img id='picture' width='450vw' height='450vh'/>-->
+</div>
+<form action="/takePicture" id='takePicture' method="GET">
+        <button type="submit">Take Picture</button>
+</form>
+<form action="/up" method="GET">
+        <button type="submit">Up</button>
+</form>
+<form action="/down" method="GET">
+        <button type="submit">Down</button>
+</form>
+<form action="/left" method="GET">
+        <button type="submit">Left</button>
+</form>
+<form action="/right" method="GET">
+        <button type="submit">Right</button>
+</form>
+</html>
+
+
+<!--window.locationreload for hard refresh -->
+<script src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+<script type='text/javascript'>
+        //$('#takePicture').submit(function(){
+                /*$.ajax({
+                        type: 'GET',
+                       	url: '/static/image.jpg',
+                        dataType: 'image/jpg',
+                        success: function(data) {
+                                $('#picture').attr('src', 'data:image/png;base64,' + $
+                        }
+                });*/
+        //      window.location = 'index.py'
+        //});
+
+</script>
